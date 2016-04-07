@@ -4,51 +4,53 @@ using System.Collections;
 
 public class MoneyClicker : MonoBehaviour
 {
-
+    #region Variables
+    [Header("References")]
     public UpgradeHandler upgradehandler;
     public Animation juicyTrump;
-    private bool scaleIn;
+    [Header("Click Variables")]
+    public float defaultSize = 1f;
+    public float hoverSize = 1.1f;
+    public float clickSize = 0.8f;
+    public float animationTime = 0.1f;
+    #endregion
 
-    void Update()
+    #region EventManager Methods
+    /// <summary>
+    /// This method is the one which is called when the money is moused down on
+    /// </summary>
+    /// <param name="image"></param>
+    public void MoneyMouseDown(GameObject image)
     {
-        if (scaleIn)
-        {
-
-        }
-        else
-        {
-
-        }
+        BootlegTween.ScaleUI(image, new Vector3(clickSize, clickSize, clickSize), 0.1f, BootlegTween.MotionCurve.EaseOut);
     }
 
-    public void MoneyClicked()
+    /// <summary>
+    /// This method is the one which is called when the money is moused up on
+    /// </summary>
+    /// <param name="image"></param>
+    public void MoneyMouseUp(GameObject image)
     {
         GameManager.manager.moneyAvaliable += upgradehandler.clickMultiplier;
-        gameObject.AddComponent<Scaler>().SetAnimation(new Vector3(1.2f, 1.2f, 1.2f), 3f);
-        //juicyTrump.Play();
+        BootlegTween.ScaleUI(image, new Vector3(hoverSize, hoverSize, hoverSize), 0.1f, BootlegTween.MotionCurve.EaseOut);
     }
 
+    /// <summary>
+    /// This method is the one which is called when the money is hovered over
+    /// </summary>
+    /// <param name="image"></param>
     public void HoverIntoImageAnim(GameObject image)
     {
-        Vector3 scale = image.GetComponent<RectTransform>().localScale;
-        if (scale.x <= 1.2)
-        {
-            scale += new Vector3(0.01f, 0.01f, 0.01f);
-        }
+        BootlegTween.ScaleUI(image, new Vector3(hoverSize, hoverSize, hoverSize), 0.1f, BootlegTween.MotionCurve.EaseOut);
     }
 
+    /// <summary>
+    /// This method is the one which is called when the money is hovered
+    /// </summary>
+    /// <param name="image"></param>
     public void HoverOutImageAnim(GameObject image)
     {
-        Vector3 scale = image.GetComponent<RectTransform>().localScale;
-        if (scale.x <= 0.8)
-        {
-            scale -= new Vector3(0.01f, 0.01f, 0.01f);
-        }
+        BootlegTween.ScaleUI(image, new Vector3(defaultSize, defaultSize, defaultSize), 0.1f, BootlegTween.MotionCurve.EaseOut);
     }
-
-    void ClickImageAnim(RectTransform image)
-    {
-
-    }
-
+    #endregion
 }
