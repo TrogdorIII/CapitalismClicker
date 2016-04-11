@@ -33,6 +33,7 @@ public class MoneyClicker : MonoBehaviour
     {
         GameManager.manager.moneyAvaliable += upgradehandler.clickMultiplier;
         BootlegTween.ScaleUI(image, new Vector3(hoverSize, hoverSize, hoverSize), 0.1f, BootlegTween.MotionCurve.EaseOut);
+        NyarLog.logger.Log("GAINED 1 MONEY!!!");
     }
 
     /// <summary>

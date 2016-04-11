@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UpgradeHandler : MonoBehaviour
+public class UpgradeHandler : UpgradeBaseClass
 {
 
-    public int clickMultiplier = 1;
+    
 
 }
