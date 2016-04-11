@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager manager;
 
     [Header("Money Info")]
-    public int moneyAvaliable;
+    public float moneyAvaliable;
 
     #region Initialisation
     void Awake()

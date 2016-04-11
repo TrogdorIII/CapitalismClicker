@@ -3,13 +3,24 @@ using System.Collections;
 
 public class UpgradeBaseClass : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public float clickMultiplier = 1f;
+
+    #region Initialisation
+    void Awake()
+    {
+        
+    }
+
+    public void SetDefaults()
+    {
+        clickMultiplier = 1f;
+    }
+    #endregion
+
+    #region Upgrade Methods
+    public void AdjustValue(int value)
+    {
+        
+    }
+    #endregion
 }
