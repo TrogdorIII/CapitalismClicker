@@ -22,7 +22,7 @@ public class MoneyClicker : MonoBehaviour
     /// <param name="image"></param>
     public void MoneyMouseDown(GameObject image)
     {
-        BootlegTween.ScaleUI(image, new Vector3(clickSize, clickSize, clickSize), 0.1f, BootlegTween.MotionCurve.EaseOut);
+        BootlegTween.ScaleUI(image, new Vector3(clickSize, clickSize, clickSize), animationTime, BootlegTween.MotionCurve.EaseOutElastic);
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ public class MoneyClicker : MonoBehaviour
     public void MoneyMouseUp(GameObject image)
     {
         GameManager.manager.moneyAvaliable += upgradehandler.clickMultiplier;
-        BootlegTween.ScaleUI(image, new Vector3(hoverSize, hoverSize, hoverSize), 0.1f, BootlegTween.MotionCurve.EaseOut);
+        BootlegTween.ScaleUI(image, new Vector3(hoverSize, hoverSize, hoverSize), animationTime, BootlegTween.MotionCurve.EaseOutElastic);
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public class MoneyClicker : MonoBehaviour
     /// <param name="image"></param>
     public void HoverIntoImageAnim(GameObject image)
     {
-        BootlegTween.ScaleUI(image, new Vector3(hoverSize, hoverSize, hoverSize), 0.1f, BootlegTween.MotionCurve.EaseOut);
+        BootlegTween.ScaleUI(image, new Vector3(hoverSize, hoverSize, hoverSize), animationTime, BootlegTween.MotionCurve.EaseOutElastic);
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class MoneyClicker : MonoBehaviour
     /// <param name="image"></param>
     public void HoverOutImageAnim(GameObject image)
     {
-        BootlegTween.ScaleUI(image, new Vector3(defaultSize, defaultSize, defaultSize), 0.1f, BootlegTween.MotionCurve.EaseOut);
+        BootlegTween.ScaleUI(image, new Vector3(defaultSize, defaultSize, defaultSize), animationTime, BootlegTween.MotionCurve.EaseOutElastic);
     }
     #endregion
 }

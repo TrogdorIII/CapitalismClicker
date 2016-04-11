@@ -4,7 +4,7 @@ using System.Collections;
 public class BootlegTween
 {
 
-    public enum MotionCurve { Linear, EaseIn, EaseOut, SmoothStep, SmootherStep }
+    public enum MotionCurve { Linear, EaseIn, EaseOut, SmoothStep, SmootherStep, EaseOutElastic }
     public enum AnimType { Scale }
 
 

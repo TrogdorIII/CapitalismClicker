@@ -40,6 +40,7 @@ public class UIScaler : MonoBehaviour
     #region Update Methods
     void Update()
     {
+
         //While the animation is not yet finished.
         if (scale.localScale != endValue)
         {
@@ -50,16 +51,25 @@ public class UIScaler : MonoBehaviour
             {
                 curLerpTime = timeOfAnim;
             }
-            //Call the time curve method to return the time percentage
-            t = timeCurve(t);
-            //Set the scale of the object to the Lerp
-            scale.localScale = Vector3.Lerp(startValue, endValue, t);
+            //Do ease out elastic if selected
+            if (selectedCurve == BootlegTween.MotionCurve.EaseOutElastic)
+            {
+                scale.localScale = ReturnTween(curLerpTime, startValue, (endValue - startValue), timeOfAnim);
+            }
+            else
+            {
+                //Call the time curve method to return the time percentage
+                t = timeCurve(t);
+                //Set the scale of the object to the Lerp
+                scale.localScale = Vector3.Lerp(startValue, endValue, t);
+            }
         }
         else //If the animation is finished
         {
             //Destroy this component
             Destroy(this);
         }
+
     }
     #endregion
 
@@ -90,5 +100,33 @@ public class UIScaler : MonoBehaviour
                 return time += Time.deltaTime / timeOfAnim;
         }
     }
+
+    public static float EaseOutElastic(float t, float b, float c, float d)
+    {
+        if (t == 0) return b;
+        if ((t /= d) == 1) return b + c;
+        float p = d * .3f;
+        float s = 0;
+        float a = 0;
+        if (a == 0f || a < Mathf.Abs(c))
+        {
+            a = c;
+            s = p / 4;
+        }
+        else {
+            s = p / (2 * Mathf.PI) * Mathf.Asin(c / a);
+        }
+        return (a * Mathf.Pow(2, -10 * t) * Mathf.Sin((t * d - s) * (2 * Mathf.PI) / p) + c + b);
+    }
+
+    Vector3 ReturnTween(float _curLerpTime, Vector3 _startValue, Vector3 _endValue, float _timeOfAnim)
+    {
+        float x = EaseOutElastic(_curLerpTime, _startValue.x, _endValue.x, _timeOfAnim);
+        float y = EaseOutElastic(_curLerpTime, _startValue.y, _endValue.y, _timeOfAnim);
+        float z = EaseOutElastic(_curLerpTime, _startValue.z, _endValue.z, _timeOfAnim);
+        return new Vector3(x, y, z);
+    }
+
     #endregion
+
 }
