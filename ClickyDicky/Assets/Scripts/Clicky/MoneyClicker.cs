@@ -31,7 +31,7 @@ public class MoneyClicker : MonoBehaviour
     /// <param name="image"></param>
     public void MoneyMouseUp(GameObject image)
     {
-        GameManager.manager.moneyAvaliable += upgradehandler.clickMultiplier;
+        GameManager.manager.ClickMoney();
         BootlegTween.ScaleUI(image, new Vector3(hoverSize, hoverSize, hoverSize), animationTime, BootlegTween.MotionCurve.EaseOutElastic);
     }
 

@@ -9,6 +9,6 @@ public class MoneyCounterUI : MonoBehaviour
 
     void Update()
     {
-        moneyImage.text = GameManager.manager.moneyAvaliable.ToString();
+        moneyImage.text = GameManager.manager.moneyInBank.ToString();
     }
 }
