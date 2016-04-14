@@ -19,6 +19,7 @@ public class NyarLog : MonoBehaviour {
     void Awake()
     {
         CheckInstance();
+        logText.text = "";
         Log("NyarLog Online.\n");
     }
 
