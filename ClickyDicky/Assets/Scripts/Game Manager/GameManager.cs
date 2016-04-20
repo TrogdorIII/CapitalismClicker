@@ -61,6 +61,11 @@ public class GameManager : MonoBehaviour
         moneyMadeAllTime += Mathf.Abs(MoneyGain);
     }
 
+    public void DecrementMoney(float MoneyGain)
+    {
+        moneyInBank -= Mathf.Abs(MoneyGain);
+    }
+
     public void IncrementClick(int click)
     {
         timesClickedAllTime = click;
