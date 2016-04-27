@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public float moneyPerClick;
     public int goldBarsClicked;
 
+    //Required Components
+    
+
     #endregion
 
     #region Initialisation
@@ -45,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateData()
     {
-        MoneyPerClick();
+        
     }
 
     public void ClickMoney()
@@ -71,14 +74,14 @@ public class GameManager : MonoBehaviour
         timesClickedAllTime = click;
     }
 
-    public void MoneyPerClick()
+    public void SetMoneyPerClick(float amount)
     {
-        moneyPerClick = 1;//ADD MODIFERS SHIT HERE
+        moneyPerClick = amount; //ADD MODIFERS SHIT HERE
     }
 
-    public void BuyBuilding(BuildingBaseClass building)
+    public void AdjustMoneyPerClick(float amount)
     {
-
+        moneyPerClick += amount;
     }
 
     #endregion

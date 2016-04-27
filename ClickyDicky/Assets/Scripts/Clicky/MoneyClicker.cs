@@ -6,7 +6,7 @@ public class MoneyClicker : MonoBehaviour
 {
     #region Variables
     [Header("References")]
-    public UpgradeHandler upgradehandler;
+    public UpgradeHandler upgradeHandler;
     public Animation juicyTrump;
     [Header("Click Variables")]
     public float defaultSize = 1f;

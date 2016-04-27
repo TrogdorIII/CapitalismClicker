@@ -12,6 +12,7 @@ public class BuildingBaseClass
     public float profit;
     public int cost;
     public int buildingsOwned = 0;
+    public float upgradeLevel = 1f;
 
     public BuildingBaseClass(string name, string description, string tooltip, int cost, float baseProfit)
     {
@@ -29,6 +30,9 @@ public class BuildingBaseClass
             buildingsOwned += amount;
             GameManager.manager.DecrementMoney(cost * amount);
             AdjustProfit();
+
+            string _message = amount > 1 ? "Bought " + amount + " " + name + " buildings." : "Bought a " + name + " building.";
+            NyarLog.logger.Log(_message);
         }
     }
 
@@ -38,11 +42,18 @@ public class BuildingBaseClass
         AdjustProfit();
     }
 
+    public void UpgradeBuildingLevel()
+    {
+        upgradeLevel += 1;
+        AdjustProfit();
+    }
+
     public void AdjustProfit()
     {
         //Get upgrade info HERE!!!!!!
 
         //Buildingsfuck
-        profit = buildingsOwned * baseProfit;
+        profit = Mathf.Pow(buildingsOwned * baseProfit, upgradeLevel);
+        //profit = buildingsOwned * baseProfit;
     }
 }

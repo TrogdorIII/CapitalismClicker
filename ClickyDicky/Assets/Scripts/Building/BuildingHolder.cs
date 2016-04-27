@@ -36,5 +36,10 @@ public class BuildingHolder : MonoBehaviour
             }
         }
     }
+
+    public void UpgradeBuilding(string name)
+    {
+        
+    }
     #endregion
 }
