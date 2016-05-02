@@ -24,3 +24,20 @@ public class UpgradeBaseClass : MonoBehaviour {
     }
     #endregion
 }
+
+/*
+Upgrades/Buildings:
+
+    Money per click upgrade - moneyPerClick *= 2; cost: cost *= 2;
+
+    Money per second building
+
+    Chance on click to crit (250%) - critChance = 1, 5, 10, 15, 20, 25
+
+    Gold bar - 5% chance every min (have to click, falls down screen over 10s)- worth: 1000, 5000, 10000
+
+Milestones:
+
+    Changes sprite image at each threshold of an array
+
+*/
