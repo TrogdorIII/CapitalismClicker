@@ -2,47 +2,50 @@
 using UnityEngine.UI;
 using System.Collections;
 
+public class MenuHandler : MonoBehaviour
+{
 
+    public bool isTrumpMode;
 
-public class MenuHandler : MonoBehaviour {
+    public AudioSource audio;
+    public AudioClip register;
 
-	public bool isTrumpMode;
+    public Text trumpModeBtn;
+    public Material trump;
+    public Material money;
+    public GameObject moneyParticle;
+    private ParticleSystemRenderer particleRenderer;
 
-	public AudioSource audio;
-	public AudioClip register;
+    void Start()
+    {
+        audio = GetComponent<AudioSource>();
+        particleRenderer = moneyParticle.GetComponent<ParticleSystemRenderer>();
+    }
 
-	public Text trumpModeBtn;
-	public GameObject trumpParticles;
-	public GameObject moneyParticles;
+    public void LoadScene()
+    {
+        audio.PlayOneShot(register);
+        Application.LoadLevel(1);
+    }
 
-	void Start()
-	{
-		audio = GetComponent<AudioSource> ();
-	}
+    public void Quit()
+    {
+        Application.Quit();
+    }
 
-	public void LoadScene()
-	{
-		audio.PlayOneShot (register);
-		Application.LoadLevel (1);
-	}
+    public void TrumpMode()
+    {
+        if (isTrumpMode == false)
+        {
+            isTrumpMode = true;
+            particleRenderer.material = trump;
+            trumpModeBtn.text = "Trump Mode: ON";
+        }
+        else {
+            isTrumpMode = false;
+            particleRenderer.material = money;
+            trumpModeBtn.text = "Trump Mode: OFF";
 
-	public void Quit()
-	{
-		Application.Quit ();
-	}
-
-	public void TrumpMode()
-	{
-		if (isTrumpMode == false) {
-			isTrumpMode = true;
-			trumpParticles.SetActive (true);
-			moneyParticles.SetActive (false);
-			trumpModeBtn.text = "Trump Mode: ON";
-		} else {
-			isTrumpMode = false;
-			trumpParticles.SetActive (false);
-			moneyParticles.SetActive (true);
-			trumpModeBtn.text = "Trump Mode: OFF";
-		}
-	}
+        }
+    }
 }
