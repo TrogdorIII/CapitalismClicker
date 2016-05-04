@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Real_Josh_Backup.unity
+=======
+- path: Assets/Scenes/MainMenu.unity
+>>>>>>> 1a711c0f5c9bbddd9f1de5ba642c3688c6cc92b5
   isLoaded: 1
   isActive: 1

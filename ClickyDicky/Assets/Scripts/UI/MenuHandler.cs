@@ -8,6 +8,7 @@ public class MenuHandler : MonoBehaviour
     public bool isTrumpMode;
 
     public AudioSource audio;
+    public GameObject music;
     public AudioClip register;
 
     public Text trumpModeBtn;
@@ -25,7 +26,8 @@ public class MenuHandler : MonoBehaviour
     public void LoadScene()
     {
         audio.PlayOneShot(register);
-        Application.LoadLevel(1);
+        music.SetActive(false);
+        StartCoroutine(WaitToLoad());
     }
 
     public void Quit()
@@ -47,5 +49,11 @@ public class MenuHandler : MonoBehaviour
             trumpModeBtn.text = "Trump Mode: OFF";
 
         }
+    }
+
+    IEnumerator WaitToLoad()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Application.LoadLevel(1);
     }
 }
