@@ -35,7 +35,7 @@ public class MoneyClicker : MonoBehaviour
     {
         GameManager.manager.ClickMoney();
         GameObject _clickEffectInstance = (GameObject)Instantiate(clickEffectObject, Camera.main.ScreenToWorldPoint(gameObject.transform.position), Quaternion.identity);
-        Destroy(_clickEffectInstance, 5f);
+        Destroy(_clickEffectInstance, 3f);
         BootlegTween.ScaleUI(image, new Vector3(hoverSize, hoverSize, hoverSize), animationTime, BootlegTween.MotionCurve.EaseOutElastic);
     }
 
