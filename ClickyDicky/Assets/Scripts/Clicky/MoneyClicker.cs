@@ -8,6 +8,8 @@ public class MoneyClicker : MonoBehaviour
     [Header("References")]
     public UpgradeHandler upgradeHandler;
     public Animation juicyTrump;
+    public GameObject clickEffectObject;
+
     [Header("Click Variables")]
     public float defaultSize = 1f;
     public float hoverSize = 1.1f;
@@ -32,6 +34,8 @@ public class MoneyClicker : MonoBehaviour
     public void MoneyMouseUp(GameObject image)
     {
         GameManager.manager.ClickMoney();
+        GameObject _clickEffectInstance = (GameObject)Instantiate(clickEffectObject, Camera.main.ScreenToWorldPoint(gameObject.transform.position), Quaternion.identity);
+        Destroy(_clickEffectInstance, 5f);
         BootlegTween.ScaleUI(image, new Vector3(hoverSize, hoverSize, hoverSize), animationTime, BootlegTween.MotionCurve.EaseOutElastic);
     }
 
