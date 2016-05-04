@@ -4,6 +4,4 @@ using System.Collections;
 public class UpgradeHandler : UpgradeBaseClass
 {
 
-    
-
 }

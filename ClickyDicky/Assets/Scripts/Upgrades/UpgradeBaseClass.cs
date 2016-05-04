@@ -3,7 +3,25 @@ using System.Collections;
 
 public class UpgradeBaseClass : MonoBehaviour {
 
+    [Header("Money per click")]
     public float clickMultiplier = 1f;
+    public float clickMultiplierCost = 50f;
+
+    [Header("Critical click")]
+    public float critClickProfit = 2f;
+    public float[] clickCritChance = { 0.01f, 0.05f, 0.1f, 0.15f, 0.2f, 0.25f };
+    public int critClickLevel = 1;
+
+    [Header("Gold bar event")]
+    public float[] goldBarProfit = { 1000f, 5000f, 10000f };
+    public float goldBarChance = 0.05f;
+    public float goldBarRatePerMinute = 1f;
+    public int goldBarLevel = 1;
+    public float goldBarScreenTime = 10f;
+
+    [Header("Dependencies")]
+    public GameObject critEffectObject;
+    public GameObject goldBarOBject;
 
     #region Initialisation
     void Awake()
@@ -17,11 +35,16 @@ public class UpgradeBaseClass : MonoBehaviour {
     }
     #endregion
 
-    #region Upgrade Methods
-    public void AdjustValue(int value)
-    {
-        
-    }
+    #region Money per Click
+    
+    #endregion
+
+    #region Critical Click
+
+    #endregion
+
+    #region Gold bar event
+
     #endregion
 }
 
@@ -32,7 +55,7 @@ Upgrades/Buildings:
 
     Money per second building
 
-    Chance on click to crit (250%) - critChance = 1, 5, 10, 15, 20, 25
+    Chance on click to crit (200%) - critChance = 1, 5, 10, 15, 20, 25
 
     Gold bar - 5% chance every min (have to click, falls down screen over 10s)- worth: 1000, 5000, 10000
 

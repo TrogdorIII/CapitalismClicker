@@ -1,45 +1,60 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BuildingHolder : MonoBehaviour
+namespace Game
 {
 
-    public BuildingBaseClass[] buildings;
-    private float timer;
-
-    void Update()
+    public class BuildingHolder : MonoBehaviour
     {
-        if (timer > 1)
-        {
-            CalculateBuildingProfit();
-            timer = 0;
-        }
-        timer += Time.deltaTime;
-    }
 
-    public void CalculateBuildingProfit()
-    {
-        foreach (var building in buildings)
-        {
-            GameManager.manager.IncrementMoney(building.profit);
-        }
-    }
+        public BuildingBaseClass[] buildings;
+        private float timer;
 
-    #region BuyBuilding
-    public void BuyOneBuilding(string name)
-    {
-        for (int i = 0; i < buildings.Length; i++)
+        void Update()
         {
-            if (buildings[i].name == name)
+            if (timer > 1)
             {
-                buildings[i].BuyBuilding(1);
+                CalculateBuildingProfit();
+                timer = 0;
+            }
+            timer += Time.deltaTime;
+
+            //TEST INPUT
+            if (Input.GetKeyDown("1"))
+                UpgradeBuilding("bongo");
+        }
+
+        public void CalculateBuildingProfit()
+        {
+            foreach (var building in buildings)
+            {
+                GameManager.manager.IncrementMoney(building.profit);
             }
         }
+
+        #region BuyBuilding
+        public void BuyOneBuilding(string name)
+        {
+            for (int i = 0; i < buildings.Length; i++)
+            {
+                if (buildings[i].name == name)
+                {
+                    buildings[i].BuyBuilding(1);
+                }
+            }
+        }
+
+        public void UpgradeBuilding(string name)
+        {
+            foreach (BuildingBaseClass building in buildings)
+            {
+                if (building.name == name)
+                {
+                    building.UpgradeBuildingLevel();
+                }
+            }
+        }
+        #endregion
     }
 
-    public void UpgradeBuilding(string name)
-    {
-        
-    }
-    #endregion
 }
