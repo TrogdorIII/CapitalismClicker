@@ -33,6 +33,7 @@ namespace Game
         [Header("Dependencies")]
         public GameObject critEffectObject;
         public GameObject goldBarObject;
+        GameObject goldBarInstance;
         public GameObject goldBarSpawnPoint;
         public GameObject spawnPoint_Left;
         public GameObject spawnPoint_Right;
@@ -94,8 +95,8 @@ namespace Game
         {
             if (Random.value <= critClickChance[critClickLevel - 1])
             {
-                Instantiate(critEffectObject, gameObject.transform.position, Quaternion.identity);
-                Destroy(critEffectObject, 3f);
+                GameObject _critEffectInstance = (GameObject)Instantiate(critEffectObject, gameObject.transform.position, Quaternion.identity);
+                Destroy(_critEffectInstance, 3f);
                 return critClickProfit;
             }
             else
@@ -129,27 +130,36 @@ namespace Game
 
         public void SpawnGoldBar()
         {
+            Vector3 _originalPos = goldBarSpawnPoint.transform.position;
+
             RandomiseSpawnPoint();
+            goldBarInstance = (GameObject)Instantiate(goldBarObject, goldBarSpawnPoint.transform.position, Quaternion.identity);
             StartCoroutine("MoveGoldBar");
             SetNewGoldBarStepTime();
 
+            goldBarSpawnPoint.transform.position = _originalPos;
         }
 
         IEnumerator MoveGoldBar()
         {
-            Vector3 _startPos = goldBarSpawnPoint.transform.position;
-            Vector3 _endPos = goldBarSpawnPoint.transform.position + new Vector3(0, -(Camera.main.rect.height + (Camera.main.rect.height / 10)));
+            Vector3 _startPos = goldBarInstance.transform.position;
+            Vector3 _endPos = goldBarInstance.transform.position + new Vector3(0, -22);
 
-            float _step = 0.0f;
-            float _speed = 1.0f / (goldBarScreenTime + 2f);
-            //Update the position of the fireball every frame
-            while (_step < 1.0f)
+            float journeyLength = Vector3.Distance(_startPos, _endPos);
+            float startTime = Time.time;
+
+            float _speed = goldBarScreenTime / 10f;
+
+            while (goldBarInstance.transform.position != _endPos)
             {
-                _step += Time.deltaTime * _speed;
-                goldBarObject.transform.position = Vector3.Lerp(_startPos, _endPos, _step);
+                float distCovered = (Time.time - startTime) * _speed;
+                float fracJourney = distCovered / journeyLength;
+                goldBarInstance.transform.position = Vector3.Lerp(_startPos, _endPos, fracJourney);
 
                 yield return null;
             }
+
+            Destroy(goldBarInstance);
         }
 
         void RandomiseSpawnPoint()

@@ -2,6 +2,7 @@
 using System.Collections;
 
 using Game;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     public float timeSinceGameStart;
     public float moneyPerSecond;
     public float moneyPerClick;
+    float moneyGainInstance;
     public int goldBarsClicked;
 
     //Required Components
@@ -48,6 +50,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         UpdateData();
+
+        if (EndGameConditionsMet())
+            EndGame();
     }
 
     void UpdateData()
@@ -59,7 +64,11 @@ public class GameManager : MonoBehaviour
 
     public void ClickMoney()
     {
-        IncrementMoney(moneyPerClick * UpgradeBaseClass.instance.clickMultiplier * UpgradeBaseClass.instance.CriticalClick());
+        moneyGainInstance = moneyPerClick * UpgradeBaseClass.instance.clickMultiplier * UpgradeBaseClass.instance.CriticalClick();
+        IncrementMoney(moneyGainInstance);
+        print(moneyGainInstance);
+        
+        timesClickedAllTime += 1;
     }
 
     #region Setters
@@ -88,6 +97,23 @@ public class GameManager : MonoBehaviour
     public void AdjustMoneyPerClick(float amount)
     {
         moneyPerClick += amount;
+    }
+    #endregion
+
+    #region End Game
+    public bool EndGameConditionsMet()
+    {
+        if (moneyInBank >= Mathf.Infinity)
+            return true;
+
+        return false;
+    }
+
+    public void EndGame()
+    {
+        
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        //Application.LoadLevel(Application.loadedLevel);
     }
     #endregion
 }

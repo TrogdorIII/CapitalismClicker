@@ -34,8 +34,10 @@ public class BuildingBaseClass
             cost *= 2;
             AdjustProfit();
 
-            string _message = amount > 1 ? "Bought " + amount + " " + name + " buildings." : "Bought a " + name + " building.";
-            NyarLog.logger.Log(_message);
+            //string _message = amount > 1 ? "Bought " + amount + " " + name + " buildings." : "Bought a " + name + " building.";
+            //NyarLog.logger.Log(_message);
+
+            NyarLog.logger.Log(name + " buildings owned: " + buildingsOwned);
         }
     }
 

@@ -36,10 +36,6 @@ namespace Game
                 timer = 0;
             }
             timer += Time.deltaTime;
-
-            //TEST INPUT
-            if (Input.GetKeyDown("1"))
-                UpgradeBuilding("bongo");
         }
 
         public void CalculateBuildingProfit()
@@ -70,6 +66,14 @@ namespace Game
                 {
                     building.UpgradeBuildingLevel();
                 }
+            }
+        }
+
+        public void UpgradeAll()
+        {
+            foreach (BuildingBaseClass building in buildings)
+            {
+                building.UpgradeBuildingLevel();
             }
         }
         #endregion
