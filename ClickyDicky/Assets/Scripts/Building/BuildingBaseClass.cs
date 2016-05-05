@@ -4,7 +4,6 @@ using System.Collections;
 [System.Serializable]
 public class BuildingBaseClass
 {
-
     public string name;
     public string description;
     public string tooltip;
