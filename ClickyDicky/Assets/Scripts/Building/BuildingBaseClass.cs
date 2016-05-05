@@ -4,15 +4,17 @@ using System.Collections;
 [System.Serializable]
 public class BuildingBaseClass
 {
-
+    #region Variables
     public string name;
     public string description;
     public string tooltip;
     public float baseProfit;
     public float profit;
     public int cost;
+    public float upgradeCost = 10f;
     public int buildingsOwned = 0;
     public float upgradeLevel = 1f;
+    #endregion
 
     public BuildingBaseClass(string name, string description, string tooltip, int cost, float baseProfit)
     {
@@ -45,11 +47,15 @@ public class BuildingBaseClass
 
     public void UpgradeBuildingLevel()
     {
-        upgradeLevel += 1;
-        cost *= 2;
-        AdjustProfit();
+        if (GameManager.manager.moneyInBank >= upgradeCost)
+        {
+            upgradeLevel += 1;
+            GameManager.manager.DecrementMoney(upgradeCost);
+            upgradeCost *= 2;
+            AdjustProfit();
 
-        NyarLog.logger.Log("Upgraded " + name + " to level " + upgradeLevel);
+            NyarLog.logger.Log("Upgraded " + name + " to level " + upgradeLevel);
+        }
     }
 
     public void AdjustProfit()
@@ -57,12 +63,3 @@ public class BuildingBaseClass
         profit = buildingsOwned * baseProfit * Mathf.Pow(2, upgradeLevel - 1);
     }
 }
-
-/*
- * profit = (b * bp) * 2^(u-1) ?
- * 
- * b = 3, bp = 1, u = 4:
- * profit = (3 * 1) * 2^(4-1)
- * = 3 * 8
- * = 24
- */

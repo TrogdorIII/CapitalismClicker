@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using Game;
+
 public class GameManager : MonoBehaviour
 {
     #region Variables
@@ -26,6 +28,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         CreateInstance();
+
+        timeSinceGameStart = 0;
     }
 
     void CreateInstance()
@@ -48,12 +52,14 @@ public class GameManager : MonoBehaviour
 
     void UpdateData()
     {
-        
+        timeSinceGameStart += Time.deltaTime;
+
+        UpgradeBaseClass.instance.CheckIfGoldBarShouldSpawn();
     }
 
     public void ClickMoney()
     {
-        IncrementMoney(moneyPerClick);
+        IncrementMoney(moneyPerClick * UpgradeBaseClass.instance.clickMultiplier * UpgradeBaseClass.instance.CriticalClick());
     }
 
     #region Setters
@@ -83,6 +89,5 @@ public class GameManager : MonoBehaviour
     {
         moneyPerClick += amount;
     }
-
     #endregion
 }

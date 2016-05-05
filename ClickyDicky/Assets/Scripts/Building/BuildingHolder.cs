@@ -6,9 +6,27 @@ namespace Game
 
     public class BuildingHolder : MonoBehaviour
     {
+        #region Variables
+        [HideInInspector]
+        public static BuildingHolder instance = null;
 
         public BuildingBaseClass[] buildings;
         private float timer;
+        #endregion
+
+        void Awake()
+        {
+            CheckInstance();
+        }
+
+        void CheckInstance()
+        {
+            if (instance == null)
+                instance = this;
+            else if (instance != this)
+                Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
+        }
 
         void Update()
         {
@@ -56,5 +74,5 @@ namespace Game
         }
         #endregion
     }
-
+    //EOC
 }

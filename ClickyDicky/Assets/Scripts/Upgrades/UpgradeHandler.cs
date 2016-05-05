@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UpgradeHandler : UpgradeBaseClass
+public class UpgradeHandler : MonoBehaviour
 {
 
 }
