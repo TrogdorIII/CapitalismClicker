@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using UnityEngine.UI;
+
 [System.Serializable]
 public class BuildingBaseClass
 {
@@ -14,6 +16,9 @@ public class BuildingBaseClass
     public float upgradeCost = 10f;
     public int buildingsOwned = 0;
     public float upgradeLevel = 1f;
+    [Space]
+    public Text buttonText;
+    public string originalButtonText;
     #endregion
 
     public BuildingBaseClass(string name, string description, string tooltip, int cost, float baseProfit)
@@ -54,6 +59,7 @@ public class BuildingBaseClass
             upgradeLevel += 1;
             GameManager.manager.DecrementMoney(upgradeCost);
             upgradeCost *= 2;
+            UpdateText();
             AdjustProfit();
 
             NyarLog.logger.Log("Upgraded " + name + " to level " + upgradeLevel);
@@ -63,5 +69,10 @@ public class BuildingBaseClass
     public void AdjustProfit()
     {
         profit = buildingsOwned * baseProfit * Mathf.Pow(2, upgradeLevel - 1);
+    }
+
+    public void UpdateText()
+    {
+        buttonText.text = originalButtonText + cost;
     }
 }

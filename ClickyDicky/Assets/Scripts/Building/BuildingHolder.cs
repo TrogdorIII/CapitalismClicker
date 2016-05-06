@@ -17,6 +17,9 @@ namespace Game
         void Awake()
         {
             CheckInstance();
+
+            buildings[0].UpdateText();
+            UpgradeBaseClass.instance.building_Text.text = UpgradeBaseClass.instance.originalBuilding_Text + buildings[0].upgradeCost;
         }
 
         void CheckInstance()
@@ -54,6 +57,12 @@ namespace Game
                 if (buildings[i].name == name)
                 {
                     buildings[i].BuyBuilding(1);
+
+                    buildings[0].UpdateText();
+                    //if (buildings[i] == buildings[0])
+                    //{
+                    //    UpgradeBaseClass.instance.building_Text.text = UpgradeBaseClass.instance.originalBuilding_Text + buildings[0].cost;
+                    //}
                 }
             }
         }
@@ -65,6 +74,11 @@ namespace Game
                 if (building.name == name)
                 {
                     building.UpgradeBuildingLevel();
+
+                    if (building == buildings[0])
+                    {
+                        UpgradeBaseClass.instance.building_Text.text = UpgradeBaseClass.instance.originalBuilding_Text + buildings[0].upgradeCost;
+                    }
                 }
             }
         }

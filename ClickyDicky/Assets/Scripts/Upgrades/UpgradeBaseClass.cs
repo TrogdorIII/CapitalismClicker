@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using UnityEngine.UI;
+
 namespace Game
 {
 
@@ -32,11 +34,22 @@ namespace Game
 
         [Header("Dependencies")]
         public GameObject critEffectObject;
+        [Space]
         public GameObject goldBarObject;
         GameObject goldBarInstance;
         public GameObject goldBarSpawnPoint;
         public GameObject spawnPoint_Left;
         public GameObject spawnPoint_Right;
+        [Space]
+        public Text building_Text;
+        public Text MPC_Text;   //money per click
+        public Text crit_Text;
+        public Text goldBar_Text;
+
+        public string originalBuilding_Text;
+        public string originalMPC_Text;
+        public string originalCrit_Text;
+        public string originalGoldBar_Text;
         #endregion
 
         #region Initialisation
@@ -45,6 +58,10 @@ namespace Game
             CheckInstance();
 
             _goldBarStepTime = goldBarsPerMinute * 60;
+
+            MPC_Text.text = originalMPC_Text + clickMultiplierCost;
+            crit_Text.text = originalCrit_Text + critClickCost;
+            goldBar_Text.text = originalGoldBar_Text + goldBarCost;
         }
 
         void CheckInstance()
@@ -71,6 +88,7 @@ namespace Game
                 clickMultiplier *= 2f;
                 GameManager.manager.DecrementMoney(clickMultiplierCost);
                 clickMultiplierCost *= 2;
+                MPC_Text.text = originalMPC_Text + clickMultiplierCost;
 
                 NyarLog.logger.Log("Upgraded Money Per Click to level " + clickMultiplierLevel);
             }
@@ -86,6 +104,7 @@ namespace Game
 
                 GameManager.manager.DecrementMoney(critClickCost);
                 critClickCost *= 2;
+                crit_Text.text = originalCrit_Text + critClickCost;
 
                 NyarLog.logger.Log("Upgraded Critical Click Chance to level " + critClickLevel);
             }
@@ -112,9 +131,9 @@ namespace Game
             if (GameManager.manager.moneyInBank >= goldBarCost && goldBarLevel < goldBarProfit.Length)
             {
                 goldBarLevel += 1;
-
                 GameManager.manager.DecrementMoney(goldBarCost);
                 goldBarCost *= 2;
+                goldBar_Text.text = originalGoldBar_Text + goldBarCost;
 
                 NyarLog.logger.Log("Upgraded Critical Click Chance to level " + goldBarLevel);
             }
