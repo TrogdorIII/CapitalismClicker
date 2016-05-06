@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
     #region End Game
     public bool EndGameConditionsMet()
     {
-        if (moneyInBank >= 1)
+        if (moneyInBank >= 10000000)
         {
             GetComponent<DesaturateAll>().AdjustGreyscale(1);
         }
@@ -115,9 +115,7 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-        //Application.LoadLevel(Application.loadedLevel);
+        Application.Quit();
     }
     #endregion
 }
