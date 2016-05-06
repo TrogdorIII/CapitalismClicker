@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public int goldBarsClicked;
 
     //Required Components
-    
+
 
     #endregion
 
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         moneyGainInstance = moneyPerClick * UpgradeBaseClass.instance.clickMultiplier * UpgradeBaseClass.instance.CriticalClick();
         IncrementMoney(moneyGainInstance);
         print(moneyGainInstance);
-        
+
         timesClickedAllTime += 1;
     }
 
@@ -103,6 +103,10 @@ public class GameManager : MonoBehaviour
     #region End Game
     public bool EndGameConditionsMet()
     {
+        if (moneyInBank >= 1)
+        {
+            GetComponent<DesaturateAll>().AdjustGreyscale(1);
+        }
         if (moneyInBank >= Mathf.Infinity)
             return true;
 
@@ -111,7 +115,7 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        
+
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         //Application.LoadLevel(Application.loadedLevel);
     }
